@@ -1,0 +1,30 @@
+table, #reset {
+  margin: 0 auto;
+  display: block;
+}
+
+h1 {
+  text-align: center;
+}
+
+td {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 80px;
+}
+
+.xed {
+  background: red;
+}
+
+.oed {
+  background: blue;
+}
+
+#reset{
+  font-size: 1em;
+  margin-top: 1em;
+  font-weight: bold;
+}
