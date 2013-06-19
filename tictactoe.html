@@ -9,25 +9,28 @@
     <div id='container'>
       <h1>Tic Tac Toe (with jQuery!)</h1>
 
-      <table>
+      <!-- We represent the Tic Tac Toe "board" with a 3x3 table. Each row keeps track of its row number and each cell keeps track of its column number, using data attributes. These act as "sticky notes" on our DOM elements, allowing us to access information about an element later. This is particularly useful for treating different elements differently in Javascript. Read about the .data() method in jQuery to see how to use data attributes well -->
+      <table id='tictactoe_board'>
         <tbody>
           <tr data-row=0>
-            <td data-col=0 class='blank'></td>
-            <td data-col=1 class='blank'></td>
-            <td data-col=2 class='blank'></td>
+            <td class='blank cell' data-col=0></td>
+            <td class='blank cell' data-col=1></td>
+            <td class='blank cell' data-col=2></td>
           </tr>
           <tr data-row=1>
-            <td data-col=0 class='blank'></td>
-            <td data-col=1 class='blank'></td>
-            <td data-col=2 class='blank'></td>
+            <td class='blank cell' data-col=0></td>
+            <td class='blank cell' data-col=1></td>
+            <td class='blank cell' data-col=2></td>
           </tr>
           <tr data-row=2>
-            <td data-col=0 class='blank'></td>
-            <td data-col=1 class='blank'></td>
-            <td data-col=2 class='blank'></td>
+            <td class='blank cell' data-col=0></td>
+            <td class='blank cell' data-col=1></td>
+            <td class='blank cell' data-col=2></td>
           </tr>
         </tbody>
       </table>
+
+      <!-- A hidden button that becomes visible once the game has ended and can be pressed to reset the game. Yes, I used an inline-style and no, this isn't generally good practice, but it's appropriate here -->
       <button id='reset' class='hidden' style='display: none;'>Reset Game</button>
     </div>
   </body>
