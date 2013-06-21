@@ -1,7 +1,7 @@
 /*
-* ===========
-* VARIABLE SETUP
-* ===========
+* =====================
+* GLOBAL VARIABLE INITIALIZATION
+* =====================
 */
 
 // Keeps track of how far the game has progressed and simulates which player's turn it is
@@ -9,16 +9,22 @@ var turn;
 var turn_time;
 var turn_timer;
 
-//Static variables for how long each turn should last and which player is human and which is computer
-var TIME_PER_TURN = 3;
-var HUMAN_PLAYER = 2;
-var COMPUTER_PLAYER = 1;
-
 // Keeps track of whether the game has finished. Several functions should be disabled when this is true
 var game_finished;
 
 // Sets up a data structure for keeping track of the Tic Tac Toe game
 var game_board;
+
+
+/*
+* ============
+* STATIC VARIABLES
+* (these should be constants that you use throughout your application.)
+* ============
+*/
+var TIME_PER_TURN = 3;
+var HUMAN_PLAYER = 2;
+var COMPUTER_PLAYER = 1;
 
 /*
 * ===============
