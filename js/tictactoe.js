@@ -5,21 +5,24 @@
 */
 
 // Keeps track of how far the game has progressed and simulates which player's turn it is
-var turn = 1;
+var turn;
+var turn_time;
+var turn_timer;
+
+var TIME_PER_TURN = 3;
+var COMPUTER_TURN_TIME = 2;
+var HUMAN_PLAYER = 1;
+var COMPUTER_PLAYER = 2;
 
 // Keeps track of whether the game has finished. Several functions should be disabled when this is true
-var game_finished = false;
+var game_finished;
 
 // Sets up a data structure for keeping track of the Tic Tac Toe game
-var game_state = [
-  [0, 0, 0],
-  [0, 0, 0],
-  [0, 0, 0]
-];
+var game_state;
 
 /*
 * ===============
-* FUNCTION DEFINITIONS
+* BASIC GAME FUNCTIONS
 * ===============
 */
 
@@ -47,6 +50,9 @@ function reset_game(){
     [0, 0, 0]
   ];
   $('td').removeClass('xed').removeClass('oed').addClass('blank').text('');
+  turn_time = TIME_PER_TURN;
+  update_timer();
+  turn_timer = setInterval(remove_second, 1000);
   $(this).hide();
 }
 
@@ -151,6 +157,70 @@ function mark_cell() {
     }
     turn += 1;
     check_everything();
+    turn_time = TIME_PER_TURN;
+    update_timer();
+
+  }
+}
+
+/*
+* =========
+* TURN TIMING
+* =========
+*/
+
+//Sets the timer on the page to display the remaining turn time
+function update_timer(){
+  $('#turn-timer').text(turn_time);
+}
+
+//Called every second that the timer interval is active, updates the visible time and checks for a time loss.
+function remove_second(){
+  if(!game_finished){
+    turn_time -= 1;
+    update_timer();
+    if(turn_time <= 0){
+      time_loss();
+    }
+  }
+}
+
+// Called when the last second is removed from the turn timer, stopping the game and showing that the current player has lost on time
+function time_loss(){
+  game_finished = true;
+  clearInterval(turn_timer);
+  alert('Player ' + get_active_player() + ' has lost on time!');
+  $('#reset').show();
+}
+
+// Gives the number of the current player; 1 for an odd turn, 2 for an even turn
+function get_active_player(){
+  return ((turn +1) % 2) +1
+}
+
+/*
+* =================
+* "ARTIFICIAL INTELLIGENCE"
+* =================
+*/
+function human_mark(){
+  if(get_active_player() === HUMAN_PLAYER){
+    mark_cell.call(this);
+    setTimeout(computer_mark, COMPUTER_TURN_TIME*1000);
+  }
+}
+
+function get_random_blank(){
+  if(!game_finished){
+    var blank_cells = $('td.blank');
+    var random_blank = $(_.shuffle(blank_cells)[0]);
+    return random_blank;
+  }
+}
+
+function computer_mark(){
+  if(get_active_player() === COMPUTER_PLAYER){
+    mark_cell.call(get_random_blank());
   }
 }
 
@@ -162,8 +232,12 @@ function mark_cell() {
 
 // Once the document has loaded, set up event handlers for when a user clicks on a cell (td) or the reset button
 $(document).ready(function() {
-  // Notice that I am using a slightly different version of the standard .click() event. This one uses "delegation", where the table that holds the td elements is delegating the event to its 'td.blank' children
-  // .on('click') is recommended over .click()
-  $('#tictactoe_board').on('click', '.blank.cell', mark_cell);
+  // Notice that I am using a slightly different version of the standard .click() event. This one uses "delegation", where the table that holds the td elements is delegating the event to its '.blank.cell' children
+  //This has the benefit of unbinding the  click event once a cell loses the 'blank' class. If you just used .click(), the event
+  // Moving forward, remember that .on('click') is recommended over .click()
+  $('#tictactoe_board').on('click', '.blank.cell', human_mark);
   $('#reset').on('click', reset_game);
+
+  //Zeroes the array, timer and turn counter
+  reset_game();
 });

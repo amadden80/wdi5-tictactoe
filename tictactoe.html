@@ -2,6 +2,7 @@
   <head>
       <title>Tic Tac Toe</title>
       <link href='css/style.css' type='text/css' rel='stylesheet'>
+      <script type='text/javascript' src='js/underscore.min.js'></script>
       <script type='text/javascript' src='js/jquery-2.0.2.min.js'></script>
       <script type='text/javascript' src='js/tictactoe.js'></script>
   </head>
@@ -29,6 +30,9 @@
           </tr>
         </tbody>
       </table>
+
+      <div>Turn Timer: <span id='turn-timer'>3</span></div>
+      <div id='active-player'>Player 1</div>
 
       <!-- A hidden button that becomes visible once the game has ended and can be pressed to reset the game. Yes, I used an inline-style and no, this isn't generally good practice, but it's appropriate here -->
       <button id='reset' class='hidden' style='display: none;'>Reset Game</button>
