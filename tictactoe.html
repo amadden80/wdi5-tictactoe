@@ -31,8 +31,11 @@
         </tbody>
       </table>
 
-      <div>Turn Timer: <span id='turn-timer'>3</span></div>
-      <div id='active-player'>Player 1</div>
+      <div id='game-stats'>
+        <div>Turn Timer: <span id='turn-timer'></span></div>
+        <div>Player <span id='active-player'>1</span></div>
+        <div id='game-over-text' style='display: none;'>GAME OVER</div>
+      </div>
 
       <!-- A hidden button that becomes visible once the game has ended and can be pressed to reset the game. Yes, I used an inline-style and no, this isn't generally good practice, but it's appropriate here -->
       <button id='reset' class='hidden' style='display: none;'>Reset Game</button>
