@@ -10,7 +10,6 @@ var turn_time;
 var turn_timer;
 
 var TIME_PER_TURN = 3;
-var COMPUTER_TURN_TIME = 2;
 var HUMAN_PLAYER = 1;
 var COMPUTER_PLAYER = 2;
 
@@ -206,7 +205,7 @@ function get_active_player(){
 function human_mark(){
   if(get_active_player() === HUMAN_PLAYER){
     mark_cell.call(this);
-    setTimeout(computer_mark, COMPUTER_TURN_TIME*1000);
+    setTimeout(computer_mark, (TIME_PER_TURN - 1)*1000);
   }
 }
 
